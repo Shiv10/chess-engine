@@ -23,6 +23,13 @@ class GameState():
         self.moveLog.append(move)
         self.whiteToMove = not self.whiteToMove
 
+    def undoMove(self):
+        if len(self.moveLog) > 0: 
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove
+
 class Move():
 
     ranksToRows = {"1": 7, "2": 6, "3": 5, "4": 4, 
@@ -38,7 +45,7 @@ class Move():
         self.endRow = end[0]
         self.endCol = end[1]
         self.pieceMoved = board[self.startRow][self.startCol]
-        self.pieceCapturesd = board[self.endRow][self.endCol]
+        self.pieceCaptured = board[self.endRow][self.endCol]
 
     def getChessNotation(self):
         return self.getRankFile(self.startRow, self.startCol) + self.getRankFile(self.endRow, self.endCol)

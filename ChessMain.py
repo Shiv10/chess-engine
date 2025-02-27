@@ -66,9 +66,13 @@ def main():
                 
                 if len(playerClicks) == 2:
                     move = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
-                    print(move.getChessNotation())
+                    gs.executeMove(move)
                     selectedSq = ()
                     playerClicks = []
+
+            if e.type == p.KEYDOWN:
+                if e.key == p.K_z:
+                    gs.undoMove()
                 
 
         drawGameState(screen, gs)
